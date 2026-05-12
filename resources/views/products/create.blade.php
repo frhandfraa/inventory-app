@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="min-h-screen bg-slate-50 py-8">
+    <div class="min-h-screen bg-slate-100 py-8">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="bg-white shadow-sm rounded-xl border border-slate-200 overflow-hidden mb-6">
@@ -149,4 +149,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stockInput = document.querySelector('#stock');
+            const statusRadios = document.querySelectorAll('input[name="status"]');
+
+            if (! stockInput || statusRadios.length === 0) {
+                return;
+            }
+
+            const updateStockState = function () {
+                const selected = document.querySelector('input[name="status"]:checked');
+
+                if (selected && selected.value === 'habis') {
+                    stockInput.value = 0;
+                    stockInput.readOnly = true;
+                    stockInput.classList.add('bg-slate-100', 'cursor-not-allowed');
+                } else {
+                    stockInput.readOnly = false;
+                    stockInput.classList.remove('bg-slate-100', 'cursor-not-allowed');
+                }
+            };
+
+            statusRadios.forEach(function (radio) {
+                radio.addEventListener('change', updateStockState);
+            });
+
+            updateStockState();
+        });
+    </script>
 @endsection

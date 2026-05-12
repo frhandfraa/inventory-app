@@ -14,11 +14,11 @@
 
                         <div>
                             <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">
-                                📦 Inventaris Barang
+                                📦 Inventaris Barang Defalima MegaMarket
                             </h1>
 
                             <p class="mt-3 text-slate-600 text-base">
-                                Kelola data inventaris dengan tampilan modern dan responsif.
+                                Manajemen Gudang dan Stok Barang untuk Defalima MegaMarket. Pantau, kelola, dan optimalkan inventaris Anda dengan mudah.
                             </p>
                         </div>
 
@@ -115,6 +115,10 @@
                     <thead class="bg-slate-100">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-600">
+                                No
+                            </th>
+
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-600">
                                 Nama Barang
                             </th>
 
@@ -149,6 +153,13 @@
                         @forelse($products as $p)
 
                             <tr class="hover:bg-slate-50 transition duration-200">
+
+                                {{-- Nomor --}}
+                                <td class="px-6 py-5">
+                                    <div class="font-semibold text-slate-700">
+                                        {{ (($products->currentPage() - 1) * $products->perPage()) + $loop->iteration }}
+                                    </div>
+                                </td>
 
                                 {{-- Nama --}}
                                 <td class="px-6 py-5">
@@ -255,7 +266,7 @@
                         @empty
 
                             <tr>
-                                <td colspan="7" class="px-6 py-16 text-center">
+                                <td colspan="8" class="px-6 py-16 text-center">
 
                                     <div class="flex flex-col items-center">
 

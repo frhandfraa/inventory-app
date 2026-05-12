@@ -132,21 +132,8 @@
 
                     <!-- Submit Buttons -->
                     <div class="px-6 py-6 sm:px-8 bg-slate-50">
-                        <div class="flex justify-between">
-                            <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                        class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
-                                    <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                    </svg>
-                                    Hapus Produk
-                                </button>
-                            </form>
-
-                            <div class="flex space-x-3">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center space-x-3">
                                 <a href="{{ route('products.index') }}"
                                    class="px-4 py-2 bg-slate-600 text-white text-sm font-medium rounded-lg hover:bg-slate-700 transition-colors">
                                     Batal
@@ -162,7 +149,52 @@
                         </div>
                     </div>
                 </form>
+
+                <div class="px-6 py-6 sm:px-8 bg-slate-50">
+                    <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
+                            <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Hapus Produk
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stockInput = document.querySelector('#stock');
+            const statusRadios = document.querySelectorAll('input[name="status"]');
+
+            if (! stockInput || statusRadios.length === 0) {
+                return;
+            }
+
+            const updateStockState = function () {
+                const selected = document.querySelector('input[name="status"]:checked');
+
+                if (selected && selected.value === 'habis') {
+                    stockInput.value = 0;
+                    stockInput.readOnly = true;
+                    stockInput.classList.add('bg-slate-100', 'cursor-not-allowed');
+                } else {
+                    stockInput.readOnly = false;
+                    stockInput.classList.remove('bg-slate-100', 'cursor-not-allowed');
+                }
+            };
+
+            statusRadios.forEach(function (radio) {
+                radio.addEventListener('change', updateStockState);
+            });
+
+            updateStockState();
+        });
+    </script>
 @endsection

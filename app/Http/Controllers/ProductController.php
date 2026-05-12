@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->paginate(10);
+        $products = Product::with('category')->latest()->paginate(10);
 
         return view('products.index', compact('products'));
     }
@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
@@ -33,7 +33,11 @@ class ProductController extends Controller
             'status' => 'required|in:tersedia,habis',
         ]);
 
-        Product::create($request->all());
+        if ($data['status'] === 'habis') {
+            $data['stock'] = 0;
+        }
+
+        Product::create($data);
 
         return redirect('/products')->with('success', 'Produk berhasil ditambahkan!');
     }
@@ -46,7 +50,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
@@ -55,7 +59,11 @@ class ProductController extends Controller
             'status' => 'required|in:tersedia,habis',
         ]);
 
-        $product->update($request->all());
+        if ($data['status'] === 'habis') {
+            $data['stock'] = 0;
+        }
+
+        $product->update($data);
 
         return redirect('/products')->with('success', 'Produk berhasil diperbarui!');
     }
