@@ -24,7 +24,7 @@
 
                         <div class="flex flex-wrap gap-3">
 
-                            <a href="{{ route('products.create') }}"
+                           <a href="{{ route('admin.products.create') }}"
                                class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-md transition-all duration-200 hover:scale-105">
 
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,7 +221,7 @@
                                     <div class="flex items-center justify-center gap-2">
 
                                         {{-- Edit --}}
-                                        <a href="{{ route('products.edit', $p) }}"
+                                        <a href="{{ route('admin.products.edit', $p) }}"
                                            class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 hover:bg-indigo-600 hover:text-white transition duration-200">
 
                                             <svg class="w-5 h-5"
@@ -237,7 +237,7 @@
                                         </a>
 
                                         {{-- Delete --}}
-                                        <form action="{{ route('products.destroy', $p) }}" method="POST" class="inline">
+                                        <form action="{{route('admin.products.destroy', $p) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

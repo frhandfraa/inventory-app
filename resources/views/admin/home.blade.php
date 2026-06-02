@@ -127,7 +127,7 @@
                 Tambah, edit, dan hapus data produk inventaris.
             </p>
 
-            <a href="{{ route('products.index') }}"
+            <a href="{{ route('admin.products.index') }}"
                class="inline-block mt-5 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
 
                 Lihat Produk
@@ -150,7 +150,7 @@
                 Tambah, edit, dan hapus kategori produk.
             </p>
 
-            <a href="{{ route('categories.index') }}"
+            <a href="{{ route('admin.categories.index') }}"
                class="inline-block mt-5 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition">
 
                 Lihat Kategori

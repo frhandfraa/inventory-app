@@ -22,17 +22,17 @@
 
                 <div class="flex gap-3">
 
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('admin.home') }}"
                        class="px-4 py-2 rounded-lg hover:bg-slate-100">
                         Dashboard
                     </a>
 
-                    <a href="{{ route('products.index') }}"
+                    <a href="{{ route('admin.products.index') }}"
                        class="px-4 py-2 rounded-lg hover:bg-slate-100">
                         Produk
                     </a>
 
-                    <a href="{{ route('categories.index') }}"
+                    <a href="{{ route('admin.categories.index') }}"
                        class="px-4 py-2 rounded-lg hover:bg-slate-100">
                         Kategori
                     </a>
@@ -44,6 +44,14 @@
         </div>
 
     </nav>
+
+    @if(session('success'))
+        <div class="max-w-7xl mx-auto mt-4">
+             <div class="bg-green-100 text-green-700 p-4 rounded-lg">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
 
     @yield('content')
 

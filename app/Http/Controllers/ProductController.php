@@ -12,14 +12,14 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->latest()->paginate(10);
 
-        return view('products.index', compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     // Manual CRUD methods
     public function create()
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -39,13 +39,13 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect('/products')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect('/admin/products')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('products.edit', compact('product', 'categories'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
@@ -65,14 +65,14 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect('/products')->with('success', 'Produk berhasil diperbarui!');
+        return redirect('/admin/products')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
 
-        return redirect('/products')->with('success', 'Produk berhasil dihapus!');
+        return redirect('/admin/products')->with('success', 'Produk berhasil dihapus!');
     }
 
     // Legacy auto methods (keep for backward compatibility)
@@ -89,7 +89,7 @@ class ProductController extends Controller
             'status' => 'tersedia',
         ]);
 
-        return redirect('/products')->with('success', "Produk berhasil ditambahkan: {$product->name} (ID {$product->id})");
+        return redirect('/admin/products')->with('success', "Produk berhasil ditambahkan: {$product->name} (ID {$product->id})");
     }
 
     public function updateLegacy(int $id = null)
@@ -97,7 +97,7 @@ class ProductController extends Controller
         $product = $id ? Product::find($id) : Product::first();
 
         if (! $product) {
-            return redirect('/products')->with('error', 'Produk tidak ditemukan untuk diupdate.');
+            return redirect('/admin/products')->with('error', 'Produk tidak ditemukan untuk diupdate.');
         }
 
         $product->update([
@@ -108,7 +108,7 @@ class ProductController extends Controller
             'status' => 'tersedia',
         ]);
 
-        return redirect('/products')->with('success', "Produk berhasil diupdate: {$product->name} (ID {$product->id})");
+        return redirect('/admin/products')->with('success', "Produk berhasil diupdate: {$product->name} (ID {$product->id})");
     }
 
     public function delete(int $id = null)
@@ -116,12 +116,12 @@ class ProductController extends Controller
         $product = $id ? Product::find($id) : Product::latest()->first();
 
         if (! $product) {
-            return redirect('/products')->with('error', 'Produk tidak ditemukan untuk dihapus.');
+            return redirect('/admin/products')->with('error', 'Produk tidak ditemukan untuk dihapus.');
         }
 
         $productName = $product->name;
         $product->delete();
 
-        return redirect('/products')->with('success', "Produk berhasil dihapus: {$productName}");
+        return redirect('/admin/products')->with('success', "Produk berhasil dihapus: {$productName}");
     }
 }

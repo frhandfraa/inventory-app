@@ -10,7 +10,7 @@
             Daftar Kategori
         </h1>
 
-        <a href="{{ route('categories.create') }}"
+        <a href="{{ route('admin.categories.create') }}"
            class="bg-blue-600 text-white px-4 py-2 rounded-lg">
             + Tambah Kategori
         </a>
@@ -51,13 +51,13 @@
 
                         <td class="p-3 text-center">
 
-                            <a href="{{ route('categories.edit', $category) }}"
+                            <a href="{{ route('admin.categories.edit', $category) }}"
                                class="bg-yellow-500 text-white px-3 py-1 rounded">
                                 Edit
                             </a>
 
                             <form
-                                action="{{ route('categories.destroy', $category) }}"
+                                action="{{ route('admin.categories.destroy', $category) }}"
                                 method="POST"
                                 class="inline">
 
