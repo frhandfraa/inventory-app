@@ -1,22 +1,51 @@
-{{-- resources/views/layouts/main.blade.php --}}
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defalima MegaMarket</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else
-        <script src="https://cdn.tailwindcss.com"></script>
-    @endif
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-slate-100">
 
-<body class="bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200 min-h-screen text-slate-800">
-    <div class="min-h-screen">
-        @yield('content')
-    </div>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md border-b border-slate-200">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex justify-between items-center h-16">
+
+                <h1 class="font-bold text-xl text-slate-800">
+                    🏪 Defalima MegaMarket
+                </h1>
+
+                <div class="flex gap-3">
+
+                    <a href="{{ route('home') }}"
+                       class="px-4 py-2 rounded-lg hover:bg-slate-100">
+                        Dashboard
+                    </a>
+
+                    <a href="{{ route('products.index') }}"
+                       class="px-4 py-2 rounded-lg hover:bg-slate-100">
+                        Produk
+                    </a>
+
+                    <a href="{{ route('categories.index') }}"
+                       class="px-4 py-2 rounded-lg hover:bg-slate-100">
+                        Kategori
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    @yield('content')
+
 </body>
 </html>
